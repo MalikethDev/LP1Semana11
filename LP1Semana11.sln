@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerManager4", "PlayerManager4\PlayerManager4.csproj", "{55FA56B4-6DA9-4E4F-B1F6-5C5A2E0D7930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerManager4", "PlayerManagerMVC\PlayerManager4.csproj", "{F907BF61-0421-42EF-896C-6159C730C2C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerManagerMVC", "PlayerManagerMVC\PlayerManagerMVC.csproj", "{AC197FBA-8827-4B81-8BCC-A36A20F354F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,19 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55FA56B4-6DA9-4E4F-B1F6-5C5A2E0D7930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55FA56B4-6DA9-4E4F-B1F6-5C5A2E0D7930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55FA56B4-6DA9-4E4F-B1F6-5C5A2E0D7930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55FA56B4-6DA9-4E4F-B1F6-5C5A2E0D7930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F907BF61-0421-42EF-896C-6159C730C2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F907BF61-0421-42EF-896C-6159C730C2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F907BF61-0421-42EF-896C-6159C730C2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F907BF61-0421-42EF-896C-6159C730C2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC197FBA-8827-4B81-8BCC-A36A20F354F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC197FBA-8827-4B81-8BCC-A36A20F354F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC197FBA-8827-4B81-8BCC-A36A20F354F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC197FBA-8827-4B81-8BCC-A36A20F354F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
