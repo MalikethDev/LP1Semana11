@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using PlayerManagerMVC2.Model;
 using PlayerManagerMVC2.View;
 
@@ -25,7 +26,7 @@ namespace PlayerManagerMVC2.Controller
         /// <summary>
         /// Creates a new instance of the player controller.
         /// </summary>
-        public PlayerController(PlayerView)
+        public PlayerController(PlayerView, string filename)
         {
             // Initialize the view
             this.view = view;
@@ -33,12 +34,34 @@ namespace PlayerManagerMVC2.Controller
             compareByName = new CompareByName(true);
             compareByNameReverse = new CompareByName(false);
 
-            // Initialize the player list with two players using collection
-            // initialization syntax
+            // Load players from file
             playerList = new List<Player>() {
-                new Player("Best player ever", 100),
-                new Player("An even better player", 500)
-            };
+            LoadPlayersFromFile(filename);
+        }
+
+
+        private void LoadPlayersFromFile(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                throw new FileNotFoundException($"The file {filename} does not exist.");
+            }
+
+            var players = new List<Player>();
+            using (var reader = new StreamReader(filename))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var parts = line.Split(',');
+                    if (parts.Length == 2 && int.TryParse(parts[1], out int score))
+                    {
+                        players.Add(new Player(parts[0], score));
+                    }
+                }
+            }
+            return players;
+        }
         }
         public void Start()
         {
@@ -47,16 +70,14 @@ namespace PlayerManagerMVC2.Controller
             {
                 view.ShowMenu();
                 option = Console.ReadLine();
-                // Check if the user input is null or empty
 
-                // Perform action based on user option
                 switch (option)
                 {
                     case "1":
                         InsertPlayer();
                         break;
                     case "2":
-                        ListPlayers(playerList);
+                        ListPlayers();
                         break;
                     case "3":
                         ListPlayersWithScoreGreaterThan();
@@ -68,51 +89,36 @@ namespace PlayerManagerMVC2.Controller
                         view.DisplayGoodbye();
                         break;
                     default:
-                        view.DisplayError("Invalid option. Please try again.");
+                        view.DisplayError("Unknown option!");
                         break;
                 }
 
                 if (option != "0")
-                { 
-                    view.WaitforKey();
-                }
+                    view.WaitForKey();
+
             } while (option != "0");
         }
 
         private void InsertPlayer()
         {
-            // Get player information from the user
             var (name, score) = view.GetNewPlayerInfo();
-
-            // Create a new player and add it to the list
-            var player = new Player(name, score);
-            playerList.Add(player);
-
-            // Show the updated list of players
-            view.DisplayPlayers(playerList);
+            playerList.Add(new Player(name, score));
         }
 
-        private void ListPlayers(List<Player> players)
+        private void ListPlayers()
         {
-            // Show the list of players
             view.DisplayPlayers(playerList);
         }
 
         private void ListPlayersWithScoreGreaterThan()
         {
-            // Get the minimum score from the user
             int minScore = view.GetMinimumScore();
-
-            // Get players with score greater than the specified score
-            IEnumerable<Player> players = GetPlayerWithScoreGreaterThan(minScore);
-
-            // Show the list of players with score greater than the specified score
-            view.DisplayPlayers(players);
+            IEnumerable<Player> filtered = GetPlayersWithScoreGreaterThan(minScore);
+            view.DisplayPlayers(filtered);
         }
 
-        private IEnumerable<Player> GetPlayerWithScoreGreaterThan(int score)
+        private IEnumerable<Player> GetPlayersWithScoreGreaterThan(int minScore)
         {
-            // Get players with score greater than the specified score
             foreach (Player p in playerList)
             {
                 if (p.Score > minScore)
@@ -124,22 +130,19 @@ namespace PlayerManagerMVC2.Controller
 
         private void SortPlayerList()
         {
-            PlayerOrder option = view.GetSortOrder();
+            view.DisplaySortMenu();
+            string option = Console.ReadLine();
 
-            // Sort the player list based on user choice
             switch (option)
             {
-                case PlayerOrder.ByScore:
-                    playerList.Sort();
-                    break;
-                case PlayerOrder.ByName:
+                case "1":
                     playerList.Sort(compareByName);
                     break;
-                case PlayerOrder.ByNameReverse:
+                case "2":
                     playerList.Sort(compareByNameReverse);
                     break;
                 default:
-                    view.DisplayError("Invalid sorting option.");
+                    view.DisplayError("Unknown option!");
                     break;
             }
         }

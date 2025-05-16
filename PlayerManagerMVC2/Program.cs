@@ -8,11 +8,14 @@ namespace PlayerManagerMVC2
     {
         private static void Main(string[] args)
         {
-            // Create the view
+            if (args.Length < 1)
+            {
+                Console.WriteLine("Please provide the filename as a command line argument.");
+                return;
+            }
+            string filename = args[0];
             PlayerView view = new PlayerView();
-            // Create the controller
-            PlayerController controller = new PlayerController(view);
-            // Start the controller
+            PlayerController controller = new PlayerController(view, filename);
             controller.Start();
         }
     }
