@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using PlayerManagerMVC.Model;
-using PlayerManagerMVC.View;
+using PlayerManagerMVC2.Model;
+using PlayerManagerMVC2.View;
 
-namespace PlayerManagerMVC.Controller
+namespace PlayerManagerMVC2.Controller
 {
     /// <summary>
     /// The player controller.
@@ -25,10 +25,10 @@ namespace PlayerManagerMVC.Controller
         /// <summary>
         /// Creates a new instance of the player controller.
         /// </summary>
-        public PlayerController(PlayerView view)
+        public PlayerController(PlayerView)
         {
             // Initialize the view
-            view = new PlayerView();
+            this.view = view;
             // Initialize the player list
             compareByName = new CompareByName(true);
             compareByNameReverse = new CompareByName(false);
@@ -73,7 +73,7 @@ namespace PlayerManagerMVC.Controller
                 }
 
                 if (option != "0")
-                {
+                { 
                     view.WaitforKey();
                 }
             } while (option != "0");
