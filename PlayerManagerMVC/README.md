@@ -2,26 +2,43 @@
 
 ## UML Class Diagram
 
+```mermaid
 classDiagram
-class PlayerView {
-+ShowMenu()
-+DisplayPlayers(IEnumerable~Player~)
-+GetNewPlayerInfo() Tuple
-+GetSortOrder() PlayerOrder
-+GetMinimumScore() int
-}
+    class Player { 
+        +Name: string 
+        +Score: int 
+        +ToString(): string 
+        +CompareTo(Player): int 
+    }
+    class PlayerView {
+        +ShowMenu()
+        +DisplayPlayers(IEnumerable~Player~)
+        +GetNewPlayerInfo(): (string, int)
+        +GetSortOrder(): PlayerOrder
+        +GetMinimumScore(): int
+        +WaitForKey()
+        +DisplayGoodbye()
+        +DisplayError(string)
+    }
 
-class PlayerController {
--List~Player~ players
--PlayerView view
--IComparer~Player~ compareByName
--IComparer~Player~ compareByNameReverse
-+Run()
--InsertPlayer()
--ListPlayers()
--ListPlayersWithScoreGreaterThan()
--SortPlayers()
-}
+    class PlayerController {
+        -playerList: List~Player~
+        -view: PlayerView
+        -compareByName: IComparer~Player~
+        -compareByNameReverse: IComparer~Player~
+        +Start()
+        -InsertPlayer()
+        -ListPlayers()
+        -ListPlayersWithScoreGreaterThan()
+        -SortPlayerList()
+        -LoadPlayersFromFile(string)
+    }
 
-PlayerController --> PlayerView
-PlayerController --> Player
+    class CompareByName {
+        -ord: bool
+        +Compare(Player, Player): int
+    }
+
+    PlayerController --> PlayerView
+    PlayerController --> Player
+    PlayerController --> CompareByName
