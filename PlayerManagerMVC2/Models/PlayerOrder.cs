@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using PlayerManagerMVC.Model;
-
-namespace PlayerManagerMVC
+namespace PlayerManagerMVC2
 {
     public enum PlayerOrder
     {

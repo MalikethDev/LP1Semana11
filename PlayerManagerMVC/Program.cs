@@ -1,19 +1,17 @@
-﻿using PlayerManagerMVC.Controller;
-using PlayerManagerMVC.View;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PlayerManagerMVC
 {
-
+    /// <summary>
+    /// The player listing program.
+    /// </summary>
     public class Program
     {
         private static void Main(string[] args)
         {
-            // Create the view
-            PlayerView view = new PlayerView();
-            // Create the controller
-            PlayerController controller = new PlayerController(view);
-            // Start the controller
-            controller.Start();
+            var controller = new PlayerController();
+            controller.Run();
         }
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using PlayerManagerMVC2.Model;
 
-namespace PlayerManagerMVC2
+namespace PlayerManagerMVC
 {
     /// <summary>
     /// Compares players by name.
@@ -34,7 +33,7 @@ namespace PlayerManagerMVC2
         /// Creates a new instance of this class.
         /// </summary>
         /// <param name="ord">
-        /// If true order alphabetically, otherwise sort in reverse
+        /// If true order alphatetically, otherwise sort in reverse
         /// alphabetical order.
         /// </param>
         public CompareByName(bool ord)
